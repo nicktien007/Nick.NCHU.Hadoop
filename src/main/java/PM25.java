@@ -179,7 +179,7 @@ public class PM25 {
     }
 
     /**
-     * 重心計算質心
+     * 重新計算質心
      */
     public static class Reduce extends Reducer<Text, TextArrayWritable, Text, Text> {
 
