@@ -1,0 +1,50 @@
+
+plugins {
+    id 'java'
+    id 'idea'
+    id 'net.ltgt.apt' version '0.10'
+
+}
+
+repositories {
+    mavenCentral()
+    maven { url "https://repo.spring.io/milestone" }
+    maven { url "https://plugins.gradle.org/m2/" }
+}
+
+group = 'kuma'
+version = '0.0.1-SNAPSHOT'
+def projectName = 'hadoop_tutorial'
+sourceCompatibility = 1.8
+compileJava.options.encoding = 'UTF-8'
+
+ext {
+    springCloudVersion = 'Finchley.SR2'
+}
+
+//configurations {
+//    developmentOnly
+//    runtimeClasspath {
+//        extendsFrom developmentOnly
+//    }
+//    compileOnly {
+//        extendsFrom annotationProcessor
+//    }
+//}
+
+
+
+dependencies {
+    annotationProcessor 'org.projectlombok:lombok:1.18.2'
+    compileOnly 'org.projectlombok:lombok:1.18.2'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.2'
+    testCompileOnly 'org.projectlombok:lombok:1.18.2'
+
+    compile 'org.codehaus.groovy:groovy-all:2.0.0'
+    compile 'org.apache.hadoop:hadoop-common:3.3.0'
+    compile 'org.apache.hadoop:hadoop-mapreduce-client-core:3.3.0'
+    testCompile 'junit:junit:4.12'
+
+
+}
+
