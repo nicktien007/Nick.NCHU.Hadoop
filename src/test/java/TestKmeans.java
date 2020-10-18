@@ -57,7 +57,7 @@ public class TestKmeans {
         all.add(new DayInfo(p6String));
         all.add(new DayInfo(p7String));
 
-        String p = PM25.Map.calcNearPoint(k,all, new DayInfo(p1String));
+        String p = PM25.Map.calcNearKeyPoint(k,all, new DayInfo(p1String));
 
 
         System.out.println("==========================================");

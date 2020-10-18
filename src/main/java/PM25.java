@@ -129,7 +129,7 @@ public class PM25 {
                     return;
                 }
 
-                String nearPoint = calcNearPoint(allKeyPoints, allDays, dayInfo);
+                String nearPoint = calcNearKeyPoint(allKeyPoints, allDays, dayInfo);
                 addOrUpdate(resultMaps, nearPoint, dayInfo);
             });
 
@@ -163,7 +163,7 @@ public class PM25 {
          * @param p
          * @return
          */
-        public static String calcNearPoint(List<String> allKeyPoints,List<DayInfo> allDays, DayInfo p){
+        public static String calcNearKeyPoint(List<String> allKeyPoints, List<DayInfo> allDays, DayInfo p){
 
             List<Double> distances =
                     allKeyPoints.stream()

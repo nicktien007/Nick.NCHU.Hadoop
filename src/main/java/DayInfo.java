@@ -94,7 +94,7 @@ public class DayInfo {
     public double getDistance(DayInfo targetDay) {
         List<Integer> d1Values = this.values;
         List<Integer> d2Values = targetDay.getValues();
-        Integer total = 0;
+        int total = 0;
 
         for (int i = 0; i < (long) d1Values.size(); i++) {
             int d1v = d1Values.get(i);
@@ -103,7 +103,6 @@ public class DayInfo {
             total += (d1v - d2v) * (d1v - d2v);
         }
 
-        double r = Math.sqrt(total);
-        return r;
+        return Math.sqrt(total);
     }
 }
