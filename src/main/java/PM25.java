@@ -122,12 +122,13 @@ public class PM25 {
             allDays.stream().map(d -> "DayInfo=" + d.toString()).forEach(System.out::println);
             allKeyPoints.stream().map(k -> "key=" + k).forEach(System.out::println);
 
-            //如果該點位就是質心點位，就不用比較，直接加入自己的集合裡
             allDays.forEach(dayInfo -> {
+                //如果該點位就是質心點位，就不用比較，直接加入自己的集合裡
                 if (allKeyPoints.contains(dayInfo.getDate())) {
                     addOrUpdate(resultMaps, dayInfo.getDate(), dayInfo);
                     return;
                 }
+
                 String nearPoint = calcNearPoint(allKeyPoints, allDays, dayInfo);
                 addOrUpdate(resultMaps, nearPoint, dayInfo);
             });
