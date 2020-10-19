@@ -1,6 +1,5 @@
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
-import org.apache.hadoop.io.ArrayWritable;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.io.Writable;
@@ -67,6 +66,29 @@ public class PM25 {
                     context.write(new Text(keyPoints.get(r.nextInt(k)).getDate()), new Text(d.toString()));
                 }
             }
+        }
+
+        private static int[] randomCommon(int min, int max, int n){
+            if (n > (max - min + 1) || max < min) {
+                return new int[]{};
+            }
+            int[] result = new int[n];
+            int count = 0;
+            while(count < n) {
+                int num = (int) (Math.random() * (max - min)) + min;
+                boolean flag = true;
+                for (int j = 0; j < n; j++) {
+                    if(num == result[j]){
+                        flag = false;
+                        break;
+                    }
+                }
+                if(flag){
+                    result[count] = num;
+                    count++;
+                }
+            }
+            return result;
         }
     }
 
@@ -180,7 +202,7 @@ public class PM25 {
     }
 
     /**
-     * 重新計算質心
+     * 重新指定質心
      */
     public static class Reduce extends Reducer<Text, TextArrayWritable, Text, Text> {
 
@@ -263,44 +285,6 @@ public class PM25 {
 
             return vTotal_avg;
         }
-
-    }
-    public static class TextArrayWritable extends ArrayWritable {
-
-        public TextArrayWritable() {
-            super(Text.class);
-        }
-        public TextArrayWritable(String[] strings) {
-            super(Text.class);
-            Text[] texts = new Text[strings.length];
-            for (int i = 0; i < strings.length; i++  ) {
-                texts[i] = new Text(strings[i]);
-            }
-            set(texts);
-        }
-    }
-
-    private static int[] randomCommon(int min, int max, int n){
-        if (n > (max - min + 1) || max < min) {
-            return new int[]{};
-        }
-        int[] result = new int[n];
-        int count = 0;
-        while(count < n) {
-            int num = (int) (Math.random() * (max - min)) + min;
-            boolean flag = true;
-            for (int j = 0; j < n; j++) {
-                if(num == result[j]){
-                    flag = false;
-                    break;
-                }
-            }
-            if(flag){
-                result[count] = num;
-                count++;
-            }
-        }
-        return result;
     }
 
     public static void main(String[] args) throws Exception {
