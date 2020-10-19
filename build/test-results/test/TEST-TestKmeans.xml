@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="TestKmeans" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-10-19T02:26:41" hostname="MacBook-Pro.local" time="44.497">
+<testsuite name="TestKmeans" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-10-19T06:17:30" hostname="MacBook-Pro.local" time="0.018">
   <properties/>
-  <testcase name="testCalcNearDayPoint" classname="TestKmeans" time="44.497"/>
+  <testcase name="testCalcDayPoint" classname="TestKmeans" time="0.018"/>
   <system-out><![CDATA[==========================================
-NearDayPoint=2015/01/03
 ==========================================
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>

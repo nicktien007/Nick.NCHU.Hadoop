@@ -136,16 +136,16 @@ public class TestKmeans {
         allDays.add(new DayInfo(p6String));
         allDays.add(new DayInfo(p7String));
 
-        allDays.add(new DayInfo(p17String));
-        allDays.add(new DayInfo(p10String));
-        allDays.add(new DayInfo(p1String));
-        allDays.add(new DayInfo(p18String));
-        allDays.add(new DayInfo(p5String));
-        allDays.add(new DayInfo(p13String));
-        allDays.add(new DayInfo(p11String));
-        allDays.add(new DayInfo(p12String));
-        allDays.add(new DayInfo(p4String));
-        allDays.add(new DayInfo(p3String));
+//        allDays.add(new DayInfo(p17String));
+//        allDays.add(new DayInfo(p10String));
+//        allDays.add(new DayInfo(p1String));
+//        allDays.add(new DayInfo(p18String));
+//        allDays.add(new DayInfo(p5String));
+//        allDays.add(new DayInfo(p13String));
+//        allDays.add(new DayInfo(p11String));
+//        allDays.add(new DayInfo(p12String));
+//        allDays.add(new DayInfo(p4String));
+//        allDays.add(new DayInfo(p3String));
 
 
         List<Double> actual = PM25.Reduce.calcDayPoint(allDays);

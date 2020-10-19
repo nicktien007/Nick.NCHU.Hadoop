@@ -269,17 +269,17 @@ public class PM25 {
          */
         public static List<Double> calcDayPoint(List<DayInfo> thisReduceAllDays){
             int vSize = thisReduceAllDays.get(0).getValues().size();
-            int[] vTotal = new int[vSize];
+            int[] vTotals = new int[vSize];
             List<Double> vTotal_avg = new ArrayList<>();
 
-            for (DayInfo thisReduceAllDay : thisReduceAllDays) {
-                for (int j = 0; j < vSize; j++) {
-                    vTotal[j] += thisReduceAllDay.getValues().get(j);
+            for (DayInfo dayInfo : thisReduceAllDays) {
+                for (int vIndex = 0; vIndex < vSize; vIndex++) {
+                    vTotals[vIndex] += dayInfo.getValues().get(vIndex);
                 }
             }
 
-            for (int j : vTotal) {
-                double avg = ((double) j) / thisReduceAllDays.size();
+            for (int vTotal : vTotals) {
+                double avg = ((double) vTotal) / thisReduceAllDays.size();
                 vTotal_avg.add(avg);
             }
 

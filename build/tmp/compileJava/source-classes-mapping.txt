@@ -12,6 +12,8 @@ WordCount.java
  WordCount$Reduce
 DayInfo.java
  DayInfo
+TextArrayWritable.java
+ TextArrayWritable
 WordCountSorting.java
  WordCountSorting
  WordCountSorting$Map
@@ -36,4 +38,3 @@ PM25.java
  PM25$PreMap
  PM25$PreReduce
  PM25$Reduce
- PM25$TextArrayWritable
