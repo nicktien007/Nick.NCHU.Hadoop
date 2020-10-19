@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class DayInfo {
     private String id;
@@ -92,13 +93,36 @@ public class DayInfo {
     }
 
     public double getDistance(DayInfo targetDay) {
+        return calcDistance(targetDay.getValues());
+    }
+    public double getDistance(List<Integer> dayValues) {
+        return calcDistance(dayValues);
+    }
+
+
+    private double calcDistance(List<Integer> targetDayValues) {
         List<Integer> d1Values = this.values;
-        List<Integer> d2Values = targetDay.getValues();
+        List<Integer> d2Values = targetDayValues;
         int total = 0;
 
         for (int i = 0; i < (long) d1Values.size(); i++) {
             int d1v = d1Values.get(i);
             int d2v = d2Values.get(i);
+
+            total += (d1v - d2v) * (d1v - d2v);
+        }
+
+        return Math.sqrt(total);
+    }
+
+    public double getDistanceByDouble(List<Double> targetDayValues) {
+        List<Double> d1Values = this.values.stream().mapToDouble(Integer::doubleValue).boxed().collect(Collectors.toList());
+        List<Double> d2Values = targetDayValues;
+        int total = 0;
+
+        for (int i = 0; i < (long) d1Values.size(); i++) {
+            double d1v = d1Values.get(i);
+            double d2v = d2Values.get(i);
 
             total += (d1v - d2v) * (d1v - d2v);
         }

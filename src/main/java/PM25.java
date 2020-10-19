@@ -205,9 +205,8 @@ public class PM25 {
                     .findAny().get();
             System.out.println("Reduce.keyInfo="+keyInfo);
 
-            double avgDistance = calcAvgDistance(thisReduceAllDays, keyInfo);
+            String newKey = calcNearDayPointOfNewKey(thisReduceAllDays);
 
-            String newKey = calcNearAvgDistanceOfDay(thisReduceAllDays, avgDistance, keyInfo);
             System.out.println("Reduce.newKey="+newKey);
 
             for (DayInfo d : thisReduceAllDays){
@@ -215,28 +214,22 @@ public class PM25 {
             }
         }
 
-        public static double calcAvgDistance(List<DayInfo> thisReduceAllDays, DayInfo keyInfo) {
-            double total = thisReduceAllDays.stream().mapToDouble(dayInfo -> dayInfo.getDistance(keyInfo)).sum();
-
-            return total / thisReduceAllDays.size();
-        }
-
         /**
-         * 計算最靠近平均距離的點
+         * 找出最靠近新的質心的點，做為新的質心
          * @param thisReduceAllDays
-         * @param avgDistance
-         * @param keyInfo
          * @return
          */
-        public static String calcNearAvgDistanceOfDay(List<DayInfo> thisReduceAllDays, double avgDistance, DayInfo keyInfo){
+        public static String calcNearDayPointOfNewKey(List<DayInfo> thisReduceAllDays){
+
+            List<Double> dayPointValues = calcDayPoint(thisReduceAllDays);
 
             List<Double> distances = thisReduceAllDays.stream()
-                    .map(d -> (Math.abs(avgDistance - d.getDistance(keyInfo))))
+                    .map(d -> (d.getDistanceByDouble(dayPointValues)))
                     .collect(Collectors.toList());
 
-            //只有自己的距離，就回傳自己
-            if (distances.size() == 1) {
-                return keyInfo.getDate();
+            //如果沒有其它筆資料，就回傳自己
+            if (thisReduceAllDays.size() == 1) {
+                return thisReduceAllDays.stream().findFirst().get().getDate();
             }
 
             double min = distances.stream()
@@ -245,6 +238,30 @@ public class PM25 {
                     .min().getAsDouble();
 
             return ((DayInfo) thisReduceAllDays.toArray()[distances.indexOf(min)]).getDate();
+        }
+
+        /**
+         * 計算新的質心
+         * @param thisReduceAllDays
+         * @return
+         */
+        public static List<Double> calcDayPoint(List<DayInfo> thisReduceAllDays){
+            int vSize = thisReduceAllDays.get(0).getValues().size();
+            int[] vTotal = new int[vSize];
+            List<Double> vTotal_avg = new ArrayList<>();
+
+            for (DayInfo thisReduceAllDay : thisReduceAllDays) {
+                for (int j = 0; j < vSize; j++) {
+                    vTotal[j] += thisReduceAllDay.getValues().get(j);
+                }
+            }
+
+            for (int j : vTotal) {
+                double avg = ((double) j) / thisReduceAllDays.size();
+                vTotal_avg.add(avg);
+            }
+
+            return vTotal_avg;
         }
 
     }
